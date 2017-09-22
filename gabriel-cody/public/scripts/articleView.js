@@ -1,7 +1,7 @@
 'use strict';
 var app = app || {};
 
-// TODO: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declarations, in an IIFE.
+// DONE: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declarations, in an IIFE.
 // Give the IIFE a parameter called 'module'.
 // At the very end of the code, but still inside the IIFE, attach the 'articleView' object to 'module'.
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above.
@@ -135,13 +135,14 @@ var app = app || {};
   };
 
   articleView.initAdminPage = function() {
-  // TODO: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
+  // DONE: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
   // Make sure you assign the result of your Handlebars.compile call to a variable called "template", since
   // we are then calling "template" on line 117.
+    var template = Handlebars.compile($('#adminTemplate').text());
 
-  // REVIEW: We use `forEach` here because we are relying on the side-effects of the callback function:
-  // appending to the DOM.
-  // The callback is not required to return anything.
+    // REVIEW: We use `forEach` here because we are relying on the side-effects of the callback function:
+    // appending to the DOM.
+    // The callback is not required to return anything.
     app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append(template(stat)));
 
     // REVIEW: Simply write the correct values to the page:
