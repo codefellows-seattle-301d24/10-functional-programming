@@ -66,7 +66,7 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
     return Article.all.map(function(obj){
-      return obj.body.length
+      return obj.body.split(' ').length
     })
       .reduce(function(aggregator, value){
         return aggregator + value;
