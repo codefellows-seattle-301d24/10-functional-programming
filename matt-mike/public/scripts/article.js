@@ -3,11 +3,11 @@ var app = app || {};
 
 // REVIEW: Check out all of the functions that we've cleaned up with arrow function syntax.
 
-// DONE?: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declararions, in an IIFE.
+// DONE: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declararions, in an IIFE.
 // Give the IIFE a parameter called 'module'.
 // At the very end of the code, but still inside the IIFE, attach the 'Article' object to 'module'.
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above.
-let Module = (function () {
+(function (module) {
 
   function Article(rawDataObj) {
     /* REVIEW: In lab 8, we explored a lot of new functionality going on here. Let's re-examine
@@ -39,11 +39,13 @@ let Module = (function () {
   Article.loadAll = rows => {
     rows.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
 
-    // TODO: Refactor this forEach code, by using a `.map` call instead, since what we are trying to accomplish
+    // DONE: Refactor this forEach code, by using a `.map` call instead, since what we are trying to accomplish
     // is the transformation of one collection into another. Remember that we can set variables equal to the result
     // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
-
+    app.Article.all = rows.map(function(ele) {
+      return new Article(ele);
+    });
     /* OLD forEach():
     rawData.forEach(function(ele) {
     Article.all.push(new Article(ele));
@@ -130,8 +132,5 @@ let Module = (function () {
     .then(console.log)
     .then(callback);
   };
-
-  return {
-    Module.articleView = articleView;
-  };
+  module.Article = Article;
 })(app);
