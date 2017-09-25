@@ -90,9 +90,18 @@ var app = app || {};
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-
+      return {author: `${author}`,
+        wordCount: Article.all.filter(function(a) {
+          return a.author === author
+        }).map(function(a){
+          return a.body.split(' ').length
+        }).reduce(function(aggregator, value) {
+          return aggregator + value
+        })
+      }
     })
   };
+
 
   Article.truncateTable = callback => {
     $.ajax({
