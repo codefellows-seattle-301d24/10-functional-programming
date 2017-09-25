@@ -102,7 +102,6 @@ var app = app || {};
     })
   };
 
-
   Article.truncateTable = callback => {
     $.ajax({
       url: '/articles',
