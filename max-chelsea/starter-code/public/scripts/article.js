@@ -91,13 +91,22 @@ var app = app || {};
 
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
-      // TODO: Transform each author string into an object with properties for
+      return {'author': author, 'wordCount' : Article.all
+      .filter(function(articles){
+        return articles.author = author;
+      })
+      .reduce(function(total, currentValue) {
+        return currentValue.body.split(' ').length + total;
+      }, 0)};
+
+      // Done: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
       // HINT: This .map should be setup to return an object literal with two properties.
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
+      // gives us an array of all unique author names
 
     })
   };
