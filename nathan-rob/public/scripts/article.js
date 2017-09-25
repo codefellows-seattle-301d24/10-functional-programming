@@ -70,14 +70,23 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
-    return Article.all.map(this.author).reduce((accArr, current) => {
+    return Article.all.map(() => this.author).reduce((accArr, current) => {
       if(!accArr.includes(current)) accArr.concat(current);
     }, []);
   };
 
   Article.numWordsByAuthor = () => {
-    return Article.allAuthors().map(author => {
-    // TODO: Transform each author string into an object with properties for
+    return Article.allAuthors()
+      .map(author => { return {name: author, count: (author) => {
+        Article.all.map(() => {
+          if (this.author === author) return this;
+        })
+        .map(() => this.body.split(' '))
+        .reduce((sum, words) => {
+          return sum + words.length;
+        }, 0);
+      }}
+    // DONE: Transform each author string into an object with properties for
     // the author's name, as well as the total number of words across all articles
     // written by the specified author.
     // HINT: This .map should be setup to return an object literal with two properties.
@@ -85,7 +94,7 @@ var app = app || {};
     // some combination of filter, map, and reduce to get the value for the second
     // property.
 
-    })
+      })
   };
 
   Article.truncateTable = callback => {
