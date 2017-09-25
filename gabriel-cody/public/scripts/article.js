@@ -42,7 +42,7 @@ var app = app || {};
     // is the transformation of one collection into another. Remember that we can set variables equal to the result
     // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
-    Article.all = rawData.map(function(ele){
+    app.Article.all = rows.map(function(ele){
       return new Article(ele)
     })
     /* OLD forEach():
@@ -66,7 +66,7 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
     return Article.all.map(function(obj){
-      return obj.body.split(' ')
+      return obj.body.length
     })
       .reduce(function(aggregator, value){
         return aggregator + value;
@@ -87,6 +87,14 @@ var app = app || {};
       }, []);
   };
 
+  // Article.all.filter(function(a){
+  //   return a.author === app.Article.allAuthors()
+  // }).map(function(b){
+  //   return b.body.length
+  // }).reduce(function(agg, val){
+  //   console.log(agg + val)
+  // })
+
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
       // TODO: Transform each author string into an object with properties for
@@ -96,7 +104,7 @@ var app = app || {};
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-
+      return {author: `${author}`}
     })
   };
 
