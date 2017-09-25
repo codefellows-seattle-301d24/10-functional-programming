@@ -66,33 +66,40 @@ function(){
 
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
-    return Article.all.map(function(obj){obj.body}).reduce(function(sum, currentValue){
-      return sum + currentValue.split(" ").length;
-    }, 0);
+    return Article.all.map(obj=>obj.body).reduce((sum, currentValue)=>
+      sum + currentValue.split(" ").length
+    , 0);
   };
 
 
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
-    return Article.all.map(function(obj){
-      if (obj.author.includes(this)){
-
-        }else(){obj.author}}).reduce(function(authorCount, currentValue){
-        return sum + currentValue.length}, 0);
+    return Article.all.map(function(obj){return obj.author})
+    .reduce(function(authorCount, author){
+      if(!authorCount.includes(author)){
+        authorCount.push(author);
+      } return authorCount
+    },[])
   };
 
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
-      // TODO: Transform each author string into an object with properties for
+      // DONE: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
       // HINT: This .map should be setup to return an object literal with two properties.
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-      
-
+      return {
+        authorName:author,
+        totalWords: Article.all.filter(function(article){return article.author === author})
+        .map(function(article){return article.body})
+        .reduce(function(sum, currentValue){
+          return sum + currentValue.split(" ").length;
+        }, 0)
+      }
     })
   };
 
