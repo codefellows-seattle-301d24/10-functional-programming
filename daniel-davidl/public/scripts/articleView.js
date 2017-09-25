@@ -150,4 +150,4 @@ var articleView = {};
     $('#blog-stats .articles').text(app.Article.all.length);
     $('#blog-stats .words').text(app.Article.numWordsAll());
   };
-}(app);
+}(app));

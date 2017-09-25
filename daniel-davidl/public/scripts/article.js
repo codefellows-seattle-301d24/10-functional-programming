@@ -64,7 +64,7 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
     return Article.all.map(article => article.body.length)
-                      .reduce((aggregator, body) => {aggregator + body}, 0);
+                      .reduce((aggregator, body) => {aggregator + body.split(' ').length}, 0);
   };
 
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
@@ -79,9 +79,10 @@ var app = app || {};
   Article.numWordsByAuthor = () => {
     return Article.allAuthors()
       .map(author => {
-        "author": author,
-        "total words": article.all.filter(author === author).reduce((aggregator, body) => {aggregator + body}, 0);
-    }
+        author:author,
+        totalWords: Article.all
+          .filter(x => return x.author === author)
+          .reduce((aggregator, article) => aggregator + article.body.split(' ').length, 0);
       // DONE: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
@@ -90,8 +91,9 @@ var app = app || {};
       // some combination of filter, map, and reduce to get the value for the second
       // property.
 
-    })
-  };
+    });
+  }
+
 
   Article.truncateTable = callback => {
     $.ajax({
