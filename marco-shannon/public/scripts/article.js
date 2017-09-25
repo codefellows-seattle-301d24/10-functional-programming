@@ -9,6 +9,7 @@ var app = app || {};
 // At the very end of the code, but still inside the IIFE, attach the 'Article' object to 'module'.
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above.
   {function Article(rawDataObj) {
+    console.log(rawDataObj);
     /* REVIEW: In lab 8, we explored a lot of new functionality going on here. Let's re-examine
     the concept of context.
     Normally, "this" inside of a constructor function refers to the newly instantiated object.
@@ -39,15 +40,14 @@ var app = app || {};
     rows.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
 
     // TODO: Refactor this forEach code, by using a `.map` call instead, since what we are trying to accomplish
-    // is the transformation of one collection into another. Remember that we can set variables equal to the result
-    // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
+    // is the transformation of one collection into another. Remember that we can set variables equal to the result of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
 
-    /* OLD forEach():
-    rawData.forEach(function(ele) {
-    Article.all.push(new Article(ele));
-  });
-  */
+    // Article.all = rawData.map(function(ele){new Article(ele)})
+  // OLD forEach():
+  //   rawData.forEach(function(ele) {
+  //   Article.all.push(new Article(ele));
+  // });
 
   };
 
@@ -63,7 +63,11 @@ var app = app || {};
 
   // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
-    return Article.all.map().reduce()
+    return Article.all
+      .map(function(){
+
+      })
+      .reduce()
   };
 
   // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
