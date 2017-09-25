@@ -71,12 +71,13 @@ var app = app || {};
   // TODO:DONE Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
-    return Article.all.map(ele => ele.author).reduce((aggregator, author) => {
-      if (!aggregator.includes(author)){
-        aggregator.push(author)
-      }
-      return aggregator;
-    });
+    return Article.all.map(ele => ele.author)
+                      .reduce((aggregator, author) => {
+                        if (!aggregator.includes(author)){
+                          aggregator.push(author);
+                        }
+                        return aggregator;
+                      }, []);
   };
 
   Article.numWordsByAuthor = () => {
