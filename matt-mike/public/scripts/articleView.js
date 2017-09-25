@@ -1,7 +1,7 @@
 'use strict';
 var app = app || {};
 
-// DONE?: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declarations, in an IIFE.
+// DONE: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declarations, in an IIFE.
 // Give the IIFE a parameter called 'module'. - finished
 // At the very end of the code, but still inside the IIFE, attach the 'articleView' object to 'module'. - ?
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above. - finished
@@ -136,7 +136,7 @@ var app = app || {};
   };
 
   articleView.initAdminPage = function() {
-    // TODO: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
+    // DONE: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
     // Make sure you assign the result of your Handlebars.compile call to a variable called "template", since
     // we are then calling "template" on line 117.
     var sourceHtml = $('#post-template').html();
