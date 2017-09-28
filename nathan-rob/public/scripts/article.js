@@ -41,7 +41,7 @@ var app = app || {};
     // is the transformation of one collection into another. Remember that we can set variables equal to the result
     // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
-    Article.all = rawData.map(() => new Article(this));
+    Article.all = rawData.map((dataObj) => new Article(dataObj));
     // rawData.forEach(function(ele) {
     //   Article.all.push(new Article(ele));
     // });
@@ -61,7 +61,7 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
     return Article.all
-      .map(() => this.body.split(' '))
+      .map((article) => article.body.split(' '))
       .reduce((sum, words) => {
         return sum + words.length;
       }, 0);
@@ -70,7 +70,7 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
-    return Article.all.map(() => this.author).reduce((accArr, current) => {
+    return Article.all.map((article) => article.author).reduce((accArr, current) => {
       if(!accArr.includes(current)) accArr.concat(current);
     }, []);
   };
@@ -142,4 +142,4 @@ var app = app || {};
       .then(callback);
   };
   module.Article = Article;
-})();
+})(app);
