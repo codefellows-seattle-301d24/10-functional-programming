@@ -65,19 +65,17 @@ Article.fetchAll = callback => {
 
 // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
 Article.numWordsAll = () => {
-  return Article.all.map(function(articleObj){
-    return articleObj.body;
-  }).reduce(function(articleString, articleBody){
-    return articleString.concat(articleBody);
-  }, '').length;
+  return Article.all.map(articleObj => articleObj.body)
+  .reduce(function(articleString, articleBody){
+    return articleString + articleBody.split(' ').length;
+  }, 0);
 };
 
 // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
 // probably need to use the optional accumulator argument in your reduce call.
 Article.allAuthors = () => {
-  return Article.all.map(function(articleObj){
-    return articleObj.author;
-  }).reduce(function(authorArray, authorName){//pass in array, and string
+  return Article.all.map(articleObj => articleObj.author)
+  .reduce(function(authorArray, authorName){//pass in array, and string
     if(authorArray.indexOf(authorName) < 0){//if the array does not contain the string
       authorArray.push(authorName);//add it
       //citation: https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
@@ -95,15 +93,16 @@ Article.numWordsByAuthor = () => {
     // The first property should be pretty straightforward, but you will need to chain
     // some combination of filter, map, and reduce to get the value for the second
     // property.
-    return {author: author, words: Article.all.filter(function(author){
-      return Article.all.author == author;
-
-    }).map(function(authorObj){
-      return authorObj.body;
-    }).reduce(function(authorObj, authorWords){
-      return authorObj.push(authorWords);
-    },'')}.length;
-
+    return {
+      author: author,
+      words: Article.all
+              .filter(function(article){
+                return article.author === author;
+              })
+              .reduce(function(authorObj, authorWords){
+                return authorObj + authorWords.body.split(' ').length;
+              }, 0)
+    };
   })
 };
 
@@ -151,7 +150,5 @@ Article.prototype.updateRecord = function(callback) {
   .then(console.log)
   .then(callback);
 };
-  return {
-    module.Article = Article;
-  }
+  module.Article = Article;
 })(app)
