@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
     <link rel="icon" type="image/x-icon" href="https://avatars2.githubusercontent.com/u/18607604?v=3&s=200">
-    <script src="text/x-handlebars-template" id="author_stats_template"></script>
-    <!-- DONE: Setup a template for each row of the Author Stats section of this page: -->
-    <!-- whatever we call this template is what we will pass in to the Handlebars.compile function -->
+    <script type="text/x-handlebars-template" id="author_stats_template">
       <li>Author: {{ author_name }}</li>
       <li>Author word count: {{ author_word_count }}</li>
+    </script>
+    <!-- DONE: Setup a template for each row of the Author Stats section of this page: -->
+    <!-- whatever we call this template is what we will pass in to the Handlebars.compile function -->
   </head>
   <body>
     <header class="site-header clearfix">
@@ -56,7 +57,7 @@
     <script>
       // TODO: After we fetch and load all the articles, what view function do we want to run next?
       // Let's pass in a callback function, to determine what happens AFTER all articles are loaded.
-      app.Article.fetchAll();
+      app.Article.fetchAll(app.articleView.initAdminPage);
     </script>
   </body>
 </html>

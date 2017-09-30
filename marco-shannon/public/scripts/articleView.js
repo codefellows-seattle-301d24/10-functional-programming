@@ -133,7 +133,6 @@ var app = app || {};
   articleView.initAdminPage = function() {
     // DONE: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
     var $template = $('#author_stats_template').html();
-    console.log($template);
     let $compiledTemplate = Handlebars.compile($template);
     // Make sure you assign the result of your Handlebars.compile call to a variable called "template", since
     // we are then calling "template" on line 117.
