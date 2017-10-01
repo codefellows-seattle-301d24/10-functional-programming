@@ -141,11 +141,11 @@ var app = app || {};
     // appending to the DOM.
     // The callback is not required to return anything.
 
-    // app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append($compiledTemplate(stat)));
-
+//put app.Artilce.numWordsByAuthor call back up here after writing remaining functions
     // REVIEW: Simply write the correct values to the page:
     $('#blog-stats .articles').text(app.Article.all.length);
     $('#blog-stats .words').text(app.Article.numWordsAll());
+    app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append($compiledTemplate(stat)));
   };
 
   module.articleView = articleView;
